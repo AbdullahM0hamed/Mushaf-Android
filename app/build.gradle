@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.1"
 
     defaultConfig {
-        applicationId "com.prayer.times"
+        applicationId "com.mushaf.android"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
