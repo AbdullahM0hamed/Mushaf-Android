@@ -7,6 +7,7 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.mushaf.android.R
 import com.mushaf.android.databinding.MainBinding
+//import com.mushaf.android.ui.surah.SurahListController
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
-        
+
         if (!isTaskRoot) {
             finish()
             return
@@ -25,16 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
-        
+
         /*binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
 
             val currentRoot = router.backstack.firstOrNull()
-        
+
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
                     R.id.nav_read -> router.setRoot(RouterTransaction.with(SurahListController()))
-                    R.id.nav_settings -> router.setRoot(RouterTransaction.with(SettingsController()))
                 }
             }
             true
