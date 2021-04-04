@@ -7,7 +7,7 @@ import com.mushaf.android.App
 import com.mushaf.android.R
 import com.mushaf.android.databinding.RootSurahRowBinding
 
-data class SurahItem(
+data class SurahRowItem(
     val surah: Int
 ) :
     AbstractBindingItem<RootSurahRowBinding>() {
@@ -55,7 +55,8 @@ data class SurahItem(
     )
 
     override fun bindView(binding: RootSurahRowBinding, payloads: List<Any>) {
-        binding.surahNumber.text = App.applicationContext()!!.getString(transliteratedNamesMap.get(surah)!!)
+        binding.surahNumber.text = surah.toString()
+        binding.surahName.text = App.applicationContext()!!.getString(transliteratedNamesMap.get(surah)!!)
         binding.surahImg.setImageResource(surahNameImageMap.get(surah)!!)
     }
 

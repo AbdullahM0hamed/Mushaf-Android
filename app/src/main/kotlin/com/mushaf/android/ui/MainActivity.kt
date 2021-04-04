@@ -7,7 +7,7 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.mushaf.android.R
 import com.mushaf.android.databinding.MainBinding
-//import com.mushaf.android.ui.surah.SurahListController
+import com.mushaf.android.ui.surah.SurahListController
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         router = Conductor.attachRouter(this, binding.controllerContainer, savedInstance)
 
-        /*binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             val id = item.itemId
 
             val currentRoot = router.backstack.firstOrNull()
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
-        }*/
+        }
 
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_read
