@@ -18,7 +18,7 @@ class SurahListController : BaseController<SurahListBinding>() {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
-    private var surahRowItems = (1..114).map { SurahRowItem(it, mushaf.ayaat_per_surah.get(it - 1)) }
+    private var surahRowItems = (1..114).map { SurahRowItem(it) }
 
     override fun inflateView(
         inflater: LayoutInflater,

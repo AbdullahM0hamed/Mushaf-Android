@@ -8,8 +8,7 @@ import com.mushaf.android.R
 import com.mushaf.android.databinding.RootSurahRowBinding
 
 data class SurahRowItem(
-    val surah: Int,
-    val ayah_count: Int
+    val surah: Int
 ) :
     AbstractBindingItem<RootSurahRowBinding>() {
 
@@ -21,7 +20,7 @@ data class SurahRowItem(
 
         val context = App.applicationContext()
         binding.surahName.text = context.getString(context.resources.getIdentifier("surah_name_$surah", "string", context.packageName))
-        binding.surahImg.setImageResource(context.getIdentifier("surah_name_$surah", "drawable", context.packageName))
+        binding.surahImg.setImageResource(context.resources.getIdentifier("surah_name_$surah", "drawable", context.packageName))
     }
 
 
