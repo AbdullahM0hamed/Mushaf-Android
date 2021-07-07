@@ -14,9 +14,7 @@ import com.mushaf.android.databinding.SurahListBinding
 import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
 
-data class SurahListController(
-    val mushaf: Mushaf
-) : BaseController<SurahListBinding>() {
+class SurahListController : BaseController<SurahListBinding>() {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
