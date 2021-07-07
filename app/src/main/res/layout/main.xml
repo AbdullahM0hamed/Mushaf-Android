@@ -6,6 +6,9 @@
  android:layout_width="match_parent"
  android:layout_height="match_parent"
  tools:context=".ui.main.MainActivity">
+ <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
     <com.bluelinelabs.conductor.ChangeHandlerFrameLayout
      android:id="@+id/controller_container"
      android:layout_width="match_parent"
@@ -28,6 +31,8 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
+     app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
      app:menu="@menu/bottom_nav"
      app:labelVisibilityMode="labeled" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
