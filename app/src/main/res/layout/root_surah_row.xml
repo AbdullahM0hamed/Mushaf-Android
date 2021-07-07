@@ -3,6 +3,7 @@
  xmlns:android="http://schemas.android.com/apk/res/android"
  xmlns:app="http://schemas.android.com/apk/res-auto"
  android:gravity="center_vertical"
+ android:background="?android:attr/selectableItemBackground"
  android:orientation="horizontal"
  android:descendantFocusability="blocksDescendants"
  android:layout_width="fill_parent"

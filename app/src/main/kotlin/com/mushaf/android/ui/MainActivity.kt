@@ -11,7 +11,7 @@ import com.mushaf.android.ui.surah.SurahListController
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: MainBinding
+    public lateinit var binding: MainBinding
     lateinit var router: Router
 
     override fun onCreate(savedInstance: Bundle?) {
@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         if (!router.hasRootController()) {
             binding.bottomNavigation.selectedItemId = R.id.nav_read
         }
+
     }
 
     override fun onBackPressed() {

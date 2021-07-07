@@ -8,7 +8,8 @@ import com.mushaf.android.R
 import com.mushaf.android.databinding.RootSurahRowBinding
 
 data class SurahRowItem(
-    val surah: Int
+    val surah: Int,
+    val ayah_count: Int
 ) :
     AbstractBindingItem<RootSurahRowBinding>() {
 

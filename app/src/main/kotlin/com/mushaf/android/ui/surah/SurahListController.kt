@@ -1,24 +1,28 @@
 package com.mushaf.android.ui.surah
 
-import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
+import com.mushaf.android.Mushaf
 import com.mushaf.android.databinding.SurahListBinding
+import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
 
-class SurahListController : BaseController<SurahListBinding>() {
+data class SurahListController(
+    val mushaf: Mushaf
+) : BaseController<SurahListBinding>() {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
-    private var surahRowItems = (1..114).map { SurahRowItem(it) }
+    private var surahRowItems = (1..114).map { SurahRowItem(it, mushaf.ayaat_per_surah.get(it - 1)) }
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -35,6 +39,17 @@ class SurahListController : BaseController<SurahListBinding>() {
         adapter = FastAdapter.with(listOf(itemAdapter))
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
+
+        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recycler: RecyclerView?, dx: Int, dy: Int) {
+                val activityBinding = (activity as MainActivity)
+                if (dy > 0 && activityBinding.bottomNavigation.isVisible) {
+                    activityBinding.bottomNavigation.isVisible = false
+                } else {
+                    activityBinding.bottomNavigation.isVisible = true
+                }
+            }
+        }
     }
 
     override fun onDestroyView(view: View) {
