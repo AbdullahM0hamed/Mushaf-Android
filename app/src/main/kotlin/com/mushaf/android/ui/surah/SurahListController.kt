@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
@@ -35,17 +34,6 @@ class SurahListController : BaseController<SurahListBinding>() {
         adapter = FastAdapter.with(listOf(itemAdapter))
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
-
-        binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recycler: RecyclerView, dx: Int, dy: Int) {
-                val activityBinding = (activity as MainActivity).binding
-                if (dy > 0 && activityBinding.bottomNavigation.getVisibility() == View.VISIBLE) {
-                    activityBinding.bottomNavigation.setVisibility(View.GONE)
-                } else {
-                    activityBinding.bottomNavigation.setVisibility(View.VISIBLE)
-                }
-            }
-        })
     }
 
     override fun onDestroyView(view: View) {
