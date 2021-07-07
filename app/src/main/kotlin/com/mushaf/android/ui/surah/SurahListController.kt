@@ -3,12 +3,10 @@ package com.mushaf.android.ui.surah
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
-import com.mikepenz.fastadapter.GenericItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
 import com.mushaf.android.Mushaf
@@ -41,15 +39,15 @@ data class SurahListController(
         binding.recycler.adapter = adapter
 
         binding.recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recycler: RecyclerView?, dx: Int, dy: Int) {
-                val activityBinding = (activity as MainActivity)
-                if (dy > 0 && activityBinding.bottomNavigation.isVisible) {
-                    activityBinding.bottomNavigation.isVisible = false
+            override fun onScrolled(recycler: RecyclerView, dx: Int, dy: Int) {
+                val activityBinding = (activity as MainActivity).binding
+                if (dy > 0 && activityBinding.bottomNavigation.getVisibility() == View.VISIBLE) {
+                    activityBinding.bottomNavigation.setVisibility(View.GONE)
                 } else {
-                    activityBinding.bottomNavigation.isVisible = true
+                    activityBinding.bottomNavigation.setVisibility(View.VISIBLE)
                 }
             }
-        }
+        })
     }
 
     override fun onDestroyView(view: View) {
