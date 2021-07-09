@@ -1,5 +1,6 @@
 package com.mushaf.android.data
 
+import android.content.Context
 import android.content.SharedPreferences
 import com.mushaf.android.Mushaf
 import com.mushaf.android.App
@@ -16,7 +17,7 @@ object PreferenceHelper {
     val DB_SUFFIX = "_db"
 
     fun getPreferences(): SharedPreferences {
-        return context.getSharedPreferences(context.pkgName, context.MODE_PRIVATE)
+        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
     }
 
     fun getCurrentMushaf(): Mushaf? {
@@ -36,5 +37,5 @@ object PreferenceHelper {
         }
     }
 
-    fun Mushaf.getAyaatCount: List<Int> = getPreferences().getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
+    fun Mushaf.getAyaatCount(): List<Int> = getPreferences().getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
 }
