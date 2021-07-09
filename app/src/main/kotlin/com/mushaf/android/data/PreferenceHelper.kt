@@ -22,9 +22,9 @@ object PreferenceHelper {
 
     fun getCurrentMushaf(): Mushaf? {
         val prefs = getPreferences()
-        val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")!!
+        val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")
 
-        return if (currentMushaf != null) {
+        return if (currentMushaf != "") {
             Mushaf(
                 currentMushaf.split("_").get(0),
                 currentMushaf.split("_").get(1) as Int,
