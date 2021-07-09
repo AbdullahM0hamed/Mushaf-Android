@@ -31,4 +31,8 @@ data class SurahRowItem(
         binding = RootSurahRowBinding.inflate(inflater, parent, false)
         return binding
     }
+
+    fun setAyahCount(count: Int) {
+        binding.surahTypeCount.text = count.toString()
+    }
 }

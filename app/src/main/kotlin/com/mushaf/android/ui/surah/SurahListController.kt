@@ -9,11 +9,15 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
 import com.mushaf.android.Mushaf
+import com.mushaf.android.data.PreferenceHelper.getAyaatCount
 import com.mushaf.android.databinding.SurahListBinding
 import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
+import kotlin.concurrent.thread
 
-class SurahListController : BaseController<SurahListBinding>() {
+data class SurahListController(
+    val mushaf: Mushaf
+) : BaseController<SurahListBinding>() {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
@@ -34,6 +38,14 @@ class SurahListController : BaseController<SurahListBinding>() {
         adapter = FastAdapter.with(listOf(itemAdapter))
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
+
+        thread {
+            for (i in 0 until surahRowItems.size) {
+                activity!!.runOnUiThread {
+                    (surahRowItems.get(i) as SurahRowItem).ayahCount = mushaf.getAyaatCount().get(i) 
+                }
+            }
+        }
     }
 
     override fun onDestroyView(view: View) {

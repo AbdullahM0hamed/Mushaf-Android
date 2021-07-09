@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import com.mushaf.android.Mushaf
 import com.mushaf.android.R
 import com.mushaf.android.databinding.MainBinding
+import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
 import com.mushaf.android.ui.surah.SurahListController
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
-                    R.id.nav_read -> router.setRoot(RouterTransaction.with(SurahListController()))
+                    R.id.nav_read -> router.setRoot(RouterTransaction.with(SurahListController(getCurrentMushaf()!!)))
                 }
             }
             true
@@ -51,4 +53,7 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+
+    fun downloadMushaf(): Mushaf = throw Exception("Placeholder")
 }
