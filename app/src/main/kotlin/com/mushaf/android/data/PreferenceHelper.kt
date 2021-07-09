@@ -2,9 +2,10 @@ package com.mushaf.android.data
 
 import android.content.SharedPreferences
 import com.mushaf.android.Mushaf
+import com.mushaf.android.App
 import com.mushaf.android.R
 
-class PreferenceHelper {
+object PreferenceHelper {
 
     val context = App.applicationContext()
 
@@ -19,7 +20,7 @@ class PreferenceHelper {
     }
 
     fun getCurrentMushaf(): Mushaf? {
-        val prefs = getPreferenfes()
+        val prefs = getPreferences()
         val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, null)
 
         return if (currentMushaf != null) {
@@ -35,5 +36,5 @@ class PreferenceHelper {
         }
     }
 
-    fun Mushaf.getAyaatCount: List<Int> = getPreferences().getString(riwaayah + "_" + type, "").split(",") as List<Int>
+    fun Mushaf.getAyaatCount: List<Int> = getPreferences().getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
 }

@@ -42,7 +42,7 @@ data class SurahListController(
         thread {
             for (i in 0 until surahRowItems.size) {
                 activity!!.runOnUiThread {
-                    (surahRowItems.get(i) as SurahRowItem).ayahCount = mushaf.getAyaatCount().get(i) 
+                    (surahRowItems.get(i) as SurahRowItem).setAyahCount (mushaf.getAyaatCount().get(i))
                 }
             }
         }
