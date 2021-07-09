@@ -28,9 +28,9 @@ object PreferenceHelper {
             Mushaf(
                 currentMushaf.split("_").get(0),
                 currentMushaf.split("_").get(1) as Int,
-                prefs.get(currentMushaf + LOCATION_SUFFIX, "") as String,
+                prefs.getString(currentMushaf + LOCATION_SUFFIX, ""),
                 prefs.getBoolean(currentMushaf + DOWNLOADED_SUFFIX, false),
-                prefs.get(currentMushaf + DB_SUFFIX, "") as String
+                prefs.getString(currentMushaf + DB_SUFFIX, "")
             )
         } else {
             null
