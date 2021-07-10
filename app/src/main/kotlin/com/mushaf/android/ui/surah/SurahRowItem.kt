@@ -13,9 +13,10 @@ data class SurahRowItem(
     AbstractBindingItem<RootSurahRowBinding>() {
 
     override val type: Int = R.id.fastadapter_extension_item_id
-    public lateinit var binding: RootSurahRowBinding
+    public lateinit var rowBinding: RootSurahRowBinding
 
     override fun bindView(binding: RootSurahRowBinding, payloads: List<Any>) {
+        rowBinding = binding
         binding.surahNumber.text = surah.toString()
 
         val context = App.applicationContext()
@@ -33,6 +34,6 @@ data class SurahRowItem(
     }
 
     fun setAyahCount(count: Int) {
-        binding.surahTypeCount.text = count.toString()
+        rowBinding.surahTypeCount.text = count.toString()
     }
 }
