@@ -50,14 +50,9 @@ class SurahListController : BaseController<SurahListBinding> {
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
 
-        thread {
-            for (i in 0 until surahRowItems.size) {
-                activity!!.runOnUiThread {
-                    val count = mushaf.getAyaatCount().get(i)
-                    val item = surahRowItems.get(i) as SurahRowItem
-                    item.setAyahCount(count)
-                }
-            }
+        (1..114).map { surah ->
+            val count = mushaf.getAyaatCount().get(i)
+            SurahRowItem(surah, count)
         }
     }
 

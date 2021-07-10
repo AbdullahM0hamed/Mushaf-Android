@@ -8,16 +8,16 @@ import com.mushaf.android.R
 import com.mushaf.android.databinding.RootSurahRowBinding
 
 data class SurahRowItem(
-    val surah: Int
+    val surah: Int,
+    val ayahCount: Int
 ) :
     AbstractBindingItem<RootSurahRowBinding>() {
 
     override val type: Int = R.id.fastadapter_extension_item_id
-    public lateinit var rowBinding: RootSurahRowBinding
 
     override fun bindView(binding: RootSurahRowBinding, payloads: List<Any>) {
-        rowBinding = binding
         binding.surahNumber.text = surah.toString()
+        binding.surahTypeCount.text = ayahCount.toString()
 
         val context = App.applicationContext()
         binding.surahName.text = context.getString(context.resources.getIdentifier("surah_name_$surah", "string", context.packageName))
@@ -29,11 +29,6 @@ data class SurahRowItem(
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): RootSurahRowBinding {
-        rowBinding = RootSurahRowBinding.inflate(inflater, parent, false)
-        return rowBinding
-    }
-
-    fun setAyahCount(count: Int) {
-        rowBinding.surahTypeCount.text = count.toString()
+        return RootSurahRowBinding.inflate(inflater, parent, false)
     }
 }
