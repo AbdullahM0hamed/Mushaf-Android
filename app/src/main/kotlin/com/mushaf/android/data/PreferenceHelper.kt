@@ -35,5 +35,5 @@ object PreferenceHelper {
         }
     }
 
-    fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
+    fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString(riwaayah + "_" + type, "")!!.split(",").map { it.toInt() }
 }
