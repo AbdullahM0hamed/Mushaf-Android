@@ -17,7 +17,7 @@ object PreferenceHelper {
     val DB_SUFFIX = "_db"
 
     fun getCurrentMushaf(): Mushaf? {
-        val prefs = PreferencesManager.getDefaultSharedPreferences(context)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")
         val locationKey = currentMushaf + LOCATION_SUFFIX
         val dbKey = currentMushaf + DB_SUFFIX
@@ -36,5 +36,5 @@ object PreferenceHelper {
         }
     }
 
-    fun Mushaf.getAyaatCount(): List<Int> = getPreferences().getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
+    fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString(riwaayah + "_" + type, "")!!.split(",") as List<Int>
 }
