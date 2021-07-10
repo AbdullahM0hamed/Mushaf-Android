@@ -15,13 +15,23 @@ import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
 import kotlin.concurrent.thread
 
-data class SurahListController(
-    val mushaf: Mushaf
-) : BaseController<SurahListBinding>() {
+class SurahListController : BaseController<SurahListBinding> {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
+    private lateinit var mushaf: Mushaf
     private var surahRowItems = (1..114).map { SurahRowItem(it) }
+
+    @Suppress("unused")
+    constructor(bundle: Bundle) : super(bundle)
+
+    constructor(mushaf: Mushaf) : this(
+        Bundle().apply {
+            putString("current_mushaf", mushaf.riwaayah + "_" + mushaf.type.toString())
+        }
+    ) {
+        this.mushaf = mushaf
+    }
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -42,7 +52,7 @@ data class SurahListController(
         thread {
             for (i in 0 until surahRowItems.size) {
                 activity!!.runOnUiThread {
-                    (surahRowItems.get(i) as SurahRowItem).setAyahCount (mushaf.getAyaatCount().get(i))
+                    (surahRowItems.get(i) as SurahRowItem).setAyahCount(mushaf.getAyaatCount().get(i))
                 }
             }
         }
