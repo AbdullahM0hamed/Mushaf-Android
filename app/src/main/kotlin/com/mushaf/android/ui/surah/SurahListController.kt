@@ -21,7 +21,7 @@ class SurahListController : BaseController<SurahListBinding> {
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
     private lateinit var mushaf: Mushaf
-    private var surahRowItems = (1..114).map { SurahRowItem(it) }
+    private lateinit var surahRowItems: List<SurahRowItem>
 
     @Suppress("unused")
     constructor(bundle: Bundle) : super(bundle)
@@ -45,15 +45,16 @@ class SurahListController : BaseController<SurahListBinding> {
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
 
-        itemAdapter.set(surahRowItems)
         adapter = FastAdapter.with(listOf(itemAdapter))
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
 
-        (1..114).map { surah ->
-            val count = mushaf.getAyaatCount().get(i)
+        surahRowItems = (1..114).map { surah ->
+            val count = mushaf.getAyaatCount().get(surah)
             SurahRowItem(surah, count)
         }
+        
+        itemAdapter.set(surahRowItems)
     }
 
     override fun onDestroyView(view: View) {
