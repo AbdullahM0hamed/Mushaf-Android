@@ -22,7 +22,7 @@ object PreferenceHelper {
 
     fun getCurrentMushaf(): Mushaf? {
         val prefs = getPreferences()
-        val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")
+        val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")!!
         val locationKey = currentMushaf + LOCATION_SUFFIX
         val dbKey = currentMushaf + DB_SUFFIX
 
