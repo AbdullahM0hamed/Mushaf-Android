@@ -1,7 +1,7 @@
 package com.mushaf.android.data
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import com.mushaf.android.Mushaf
 import com.mushaf.android.App
 import com.mushaf.android.R
@@ -16,12 +16,8 @@ object PreferenceHelper {
     val DOWNLOADED_SUFFIX = "_downloaded"
     val DB_SUFFIX = "_db"
 
-    fun getPreferences(): SharedPreferences {
-        return context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
-    }
-
     fun getCurrentMushaf(): Mushaf? {
-        val prefs = getPreferences()
+        val prefs = PreferencesManager.getDefaultSharedPreferences(context)
         val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")
         val locationKey = currentMushaf + LOCATION_SUFFIX
         val dbKey = currentMushaf + DB_SUFFIX
