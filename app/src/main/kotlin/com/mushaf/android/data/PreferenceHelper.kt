@@ -26,7 +26,7 @@ object PreferenceHelper {
         return if (currentMushaf != "") {
             Mushaf(
                 currentMushaf!!.split("_").get(0),
-                currentMushaf!!.split("_").get(1) as Int,
+                currentMushaf!!.split("_").get(1).toInt(),
                 prefs.getString(locationKey, "")!!,
                 prefs.getBoolean(currentMushaf + DOWNLOADED_SUFFIX, false),
                 prefs.getString(dbKey, "")!!
