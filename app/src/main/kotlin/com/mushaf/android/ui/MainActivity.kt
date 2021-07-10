@@ -35,10 +35,9 @@ class MainActivity : AppCompatActivity() {
             val currentRoot = router.backstack.firstOrNull()
 
             if (currentRoot?.tag()?.toIntOrNull() != id) {
-                /*when (id) {
+                when (id) {
                     R.id.nav_read -> router.setRoot(RouterTransaction.with(SurahListController(getCurrentMushaf()!!)))
-                }*/
-                getCurrentMushaf()
+                }
             }
             true
         }

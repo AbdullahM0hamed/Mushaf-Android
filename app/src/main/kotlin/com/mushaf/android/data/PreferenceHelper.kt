@@ -21,7 +21,6 @@ object PreferenceHelper {
         val currentMushaf = prefs.getString(CURRENT_MUSHAF_KEY, "")
         val locationKey = currentMushaf + LOCATION_SUFFIX
         val dbKey = currentMushaf + DB_SUFFIX
-        android.widget.Toast.makeText(context, prefs.all.keys.toString(), 5).show()
 
         return if (currentMushaf != "") {
             Mushaf(
