@@ -53,7 +53,9 @@ class SurahListController : BaseController<SurahListBinding> {
         thread {
             for (i in 0 until surahRowItems.size) {
                 activity!!.runOnUiThread {
-                    (surahRowItems.get(i) as SurahRowItem).setAyahCount(mushaf.getAyaatCount().get(i).toString())
+                    val count = mushaf.getAyaatCount().get(i)
+                    val item = surahRowItems.get(i) as SurahRowItem
+                    item.setAyahCount(count)
                 }
             }
         }
