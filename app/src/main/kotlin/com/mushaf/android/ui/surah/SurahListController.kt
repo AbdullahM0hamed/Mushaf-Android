@@ -50,7 +50,7 @@ class SurahListController : BaseController<SurahListBinding> {
         binding.recycler.adapter = adapter
 
         surahRowItems = (1..114).map { surah ->
-            val count = mushaf.getAyaatCount().get(surah)
+            val count = mushaf.getAyaatCount().get(surah - 1)
             SurahRowItem(surah, count)
         }
         
