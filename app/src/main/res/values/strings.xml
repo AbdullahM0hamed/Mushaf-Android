@@ -120,4 +120,6 @@
     <string name="surah_name_112">Al-Ikhlaas</string>
     <string name="surah_name_113">Al-Falaq</string>
     <string name="surah_name_114">An-Nas</string>
+
+    <string name="ayah_count">%1$d Ayahs</string>
 </resources>

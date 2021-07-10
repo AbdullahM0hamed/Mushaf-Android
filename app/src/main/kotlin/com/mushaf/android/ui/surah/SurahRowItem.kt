@@ -17,9 +17,9 @@ data class SurahRowItem(
 
     override fun bindView(binding: RootSurahRowBinding, payloads: List<Any>) {
         binding.surahNumber.text = surah.toString()
-        binding.surahTypeCount.text = ayahCount.toString()
 
         val context = App.applicationContext()
+        binding.surahTypeCount.text = context.resources.getString(R.string.ayah_count, ayahCount)
         binding.surahName.text = context.getString(context.resources.getIdentifier("surah_name_$surah", "string", context.packageName))
         binding.surahImg.setImageResource(context.resources.getIdentifier("surah_name_$surah", "drawable", context.packageName))
     }
