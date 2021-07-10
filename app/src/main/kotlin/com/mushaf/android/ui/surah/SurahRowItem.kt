@@ -29,8 +29,8 @@ data class SurahRowItem(
         inflater: LayoutInflater,
         parent: ViewGroup?
     ): RootSurahRowBinding {
-        binding = RootSurahRowBinding.inflate(inflater, parent, false)
-        return binding
+        rowBinding = RootSurahRowBinding.inflate(inflater, parent, false)
+        return rowBinding
     }
 
     fun setAyahCount(count: Int) {
