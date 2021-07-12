@@ -13,7 +13,7 @@ import com.mushaf.android.ui.base.BaseController
 class PageController : BaseController<QuranPageBinding> {
 
     private lateinit var mushaf: Mushaf
-    private lateinit var surah: Int
+    private var surah: Int = 1
 
     @Suppress("unused")
     constructor(bundle: Bundle) : super(bundle)
