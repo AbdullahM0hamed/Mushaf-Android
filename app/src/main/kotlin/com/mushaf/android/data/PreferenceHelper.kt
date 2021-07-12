@@ -35,5 +35,7 @@ object PreferenceHelper {
         }
     }
 
-    fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString(riwaayah + "_" + type, "")!!.split(",").map { it.toInt() }
+    fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString("${riwaayah}_${type}_ayahs", "")!!.split(",").map { it.toInt() }
+
+    fun Mushaf.getPageForSurahList(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString("${riwaayah}_${type}_pages", "")!!.split("_").map { it.toInt() }
 }

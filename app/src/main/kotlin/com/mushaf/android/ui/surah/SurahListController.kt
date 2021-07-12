@@ -14,7 +14,6 @@ import com.mushaf.android.data.PreferenceHelper.getAyaatCount
 import com.mushaf.android.databinding.SurahListBinding
 import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
-import kotlin.concurrent.thread
 
 class SurahListController : BaseController<SurahListBinding> {
 
@@ -51,7 +50,7 @@ class SurahListController : BaseController<SurahListBinding> {
 
         surahRowItems = (1..114).map { surah ->
             val count = mushaf.getAyaatCount().get(surah - 1)
-            SurahRowItem(surah, count)
+            SurahRowItem(this, mushaf, surah, count)
         }
         
         itemAdapter.set(surahRowItems)
