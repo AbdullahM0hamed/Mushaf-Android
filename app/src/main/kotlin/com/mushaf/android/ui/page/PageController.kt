@@ -26,7 +26,7 @@ data class PageController(
         super.onViewCreated(view)
 
         val page = String.format("%03d", mushaf.getPageForSurahList().get(surah))
-        binding.page.setImageURI("jar:file:/${mushaf.location}!/page$page.png")
+        binding.page.setImageURI(Uri.parse("jar:file:/${mushaf.location}!/page$page.png"))
     }
 
     override fun onDestroyView(view: View) {
