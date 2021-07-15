@@ -1,7 +1,7 @@
 package com.mushaf.android.ui
 
 import android.content.pm.PackageManager
-import android.manifest.permission
+import android.Manifest.permission
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
