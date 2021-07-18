@@ -44,7 +44,7 @@ class PageController : BaseController<QuranPageBinding> {
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
         binding.root.setBackgroundColor(0xFFFEFFFA.toInt())
 
-        val page = String.format("%03d", mushaf.getPageForSurahList().get(surah))
+        val page = String.format("%03d", mushaf.getPageForSurahList().get(surah - 1))
         binding.page.setImageBitmap(getImageFromZip(mushaf.location, "page$page.png"))
     }
 
