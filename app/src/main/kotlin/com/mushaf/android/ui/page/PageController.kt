@@ -11,6 +11,7 @@ import com.mushaf.android.Mushaf
 import com.mushaf.android.databinding.QuranPageBinding
 import com.mushaf.android.data.PreferenceHelper.getPageForSurahList
 import com.mushaf.android.ui.base.BaseController
+import com.mushaf.android.ui.MainActivity
 import java.util.zip.ZipFile
 
 class PageController : BaseController<QuranPageBinding> {
@@ -40,6 +41,8 @@ class PageController : BaseController<QuranPageBinding> {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+        (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
+        binding.root.setBackgroundColor(0xFFFEFFFA.toInt())
 
         val page = String.format("%03d", mushaf.getPageForSurahList().get(surah))
         binding.page.setImageBitmap(getImageFromZip(mushaf.location, "page$page.png"))
@@ -47,6 +50,7 @@ class PageController : BaseController<QuranPageBinding> {
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
+        (activity as MainActivity).binding.bottomNavigation.setVisibility(View.VISIBLE)
     }
 
     private fun getImageFromZip(location: String, page: String): Bitmap {
