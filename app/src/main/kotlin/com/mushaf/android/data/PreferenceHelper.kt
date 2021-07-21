@@ -15,6 +15,10 @@ object PreferenceHelper {
     val LOCATION_SUFFIX = "_location"
     val DOWNLOADED_SUFFIX = "_downloaded"
     val DB_SUFFIX = "_db"
+    val DURATION = "duration"
+    val MESH_PIXELS = "mesh_pixels"
+    val PAGE_MODE = "page_mode"
+    val PAGE_COUNT = "page_count"
 
     fun getCurrentMushaf(): Mushaf? {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
@@ -38,4 +42,12 @@ object PreferenceHelper {
     fun Mushaf.getAyaatCount(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString("${riwaayah}_${type}_ayahs", "")!!.split(",").map { it.toInt() }
 
     fun Mushaf.getPageForSurahList(): List<Int> = PreferenceManager.getDefaultSharedPreferences(context).getString("${riwaayah}_${type}_pages", "")!!.split(",").map { it.toInt() }
+
+    fun getAnimationDuration(): Int = PreferenceManager.getDefaultSharedPreferences(context).getInt(DURATION, 1000)
+
+    fun getPixelsOfMesh(): Int = PreferenceManager.getDefaultSharedPreferences(context).getInt(MESH_PIXELS, 10)
+
+    fun getPageMode(): Int = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PAGE_MODE, true)
+
+    fun Mushaf.getPageCount(): Int = PreferenceManager.getDefaultSharedPreferences(context).getInt("${riwaayah}_${type}_$PAGE_COUNT", 604)
 }

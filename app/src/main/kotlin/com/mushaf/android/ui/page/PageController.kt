@@ -44,20 +44,11 @@ class PageController : BaseController<QuranPageBinding> {
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
         binding.root.setBackgroundColor(0xFFFEFFFA.toInt())
 
-        val page = String.format("%03d", mushaf.getPageForSurahList().get(surah - 1))
-        binding.page.setImageBitmap(getImageFromZip(mushaf.location, "page$page.png"))
+        //binding.page.setImageBitmap(getImageFromZip(mushaf.location, "page$page.png"))
     }
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.VISIBLE)
-    }
-
-    private fun getImageFromZip(location: String, page: String): Bitmap {
-        val zip = ZipFile(location)
-        val entry = zip.getEntry(page)
-        val stream = zip.getInputStream(entry)
-
-        return BitmapFactory.decodeStream(stream)
     }
 }
