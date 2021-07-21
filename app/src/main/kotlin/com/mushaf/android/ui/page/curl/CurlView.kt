@@ -25,9 +25,11 @@ class CurlView : GLSurfaceView, Renderer {
 
     //Pain, naming it handler conflicts with some getHandler() method I can't find
     private lateinit var mHandler: Handler
+    private lateinit var globalContext: Context
     private lateinit var drawLock: ReentrantLock
 
     private var pageRender: PageRender? = null
+    var pageNo = 1
 
     constructor(context: Context) : super(context) {
         initialise(context)
@@ -40,6 +42,7 @@ class CurlView : GLSurfaceView, Renderer {
     private fun initialise(context: Context) {
         newHandler()
 
+        globalContext = context
         duration = getAnimationDuration()
         val pixelsOfMesh = getPixelsOfMesh()
         val isAuto = getPageMode()
@@ -54,6 +57,7 @@ class CurlView : GLSurfaceView, Renderer {
         setEGLContextClientVersion(2)
 
         drawLock = ReentrantLock()
+        pageRender = SinglePageRender(context, pageFlip, handler, pageNo)
 
         setRenderer(this)
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
@@ -146,7 +150,8 @@ class CurlView : GLSurfaceView, Renderer {
             if (pageFlip.getSecondPage() != null && width > height) {
                 // Double Page Render
             } else {
-                // Single Page Render
+                pageRender?.release()
+                pageRender = SinglePageRender(globalContext, pageFlip, handler, pageNo)
             }
 
             pageRender?.onSurfaceChanged(width, height)
