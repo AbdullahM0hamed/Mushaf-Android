@@ -140,7 +140,7 @@ class CurlView : GLSurfaceView, Renderer {
         try {
             pageFlip.onSurfaceChanged(width, height)
 
-            val pageNo = pageRender.getPageNo()
+            val pageNo = pageRender?.getPageNo()
             if (pageFlip.getSecondPage() != null && width > height) {
                 // Double Page Render
             } else {
@@ -163,7 +163,7 @@ class CurlView : GLSurfaceView, Renderer {
 
     private fun newHandler() {
         handler = Handler(Looper.getMainLooper()) {
-            fun handleMessage(msg: Message) {
+            override fun handleMessage(msg: Message) {
                 when (msg.what) {
                     1 -> {
                         try {
