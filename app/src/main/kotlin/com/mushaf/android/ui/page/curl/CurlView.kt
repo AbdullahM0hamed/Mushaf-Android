@@ -140,7 +140,7 @@ class CurlView : GLSurfaceView, Renderer {
         try {
             pageFlip.onSurfaceChanged(width, height)
 
-            val pageNo = pageRender?.getPageNo()
+            val pageNo = pageRender?.pageNo
             if (pageFlip.getSecondPage() != null && width > height) {
                 // Double Page Render
             } else {
