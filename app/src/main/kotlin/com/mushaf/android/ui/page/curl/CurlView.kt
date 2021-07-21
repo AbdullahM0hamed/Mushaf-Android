@@ -29,7 +29,7 @@ class CurlView : GLSurfaceView, Renderer {
     private lateinit var drawLock: ReentrantLock
 
     private var pageRender: PageRender? = null
-    var pageNo = 1
+    var pageNo: Int  = 1
 
     constructor(context: Context) : super(context) {
         initialise(context)
