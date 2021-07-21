@@ -169,7 +169,7 @@ class CurlView : GLSurfaceView, Renderer {
                         try {
                             drawLock.lock()
                             val render = pageRender
-                            if (render != null && render.onEndedDrawing(msg?.arg1)) {
+                            if (render != null && render.onEndedDrawing(msg!!.arg1)) {
                                 requestRender()
                             }
                         } finally {
