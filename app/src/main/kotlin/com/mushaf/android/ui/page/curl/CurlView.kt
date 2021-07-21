@@ -22,7 +22,9 @@ class CurlView : GLSurfaceView, Renderer {
     private val TAG = "CurlView"
     private var duration: Int = 1000
     private lateinit var pageFlip: PageFlip
-    private lateinit var handler: Handler
+
+    //Pain, naming it handler conflicts with some getHandler() method I can't find
+    private lateinit var mHandler: Handler
     private lateinit var drawLock: ReentrantLock
 
     private var pageRender: PageRender? = null
@@ -162,7 +164,7 @@ class CurlView : GLSurfaceView, Renderer {
     }
 
     private fun newHandler() {
-        handler = object : Handler(Looper.getMainLooper()) {
+        mHandler = object : Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message?) {
                 when (msg?.what ?: 0) {
                     1 -> {
