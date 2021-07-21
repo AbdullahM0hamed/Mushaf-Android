@@ -11,10 +11,10 @@ import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
 import java.util.zip.ZipFile
 
 abstract class PageRender(
-    context: Context,
-    pageFlip: PageFlip,
-    handler: Handler,
-    pageNo: Int
+    val context: Context,
+    val pageFlip: PageFlip,
+    val handler: Handler,
+    val pageNo: Int
 ) : OnPageFlipListener {
 
     protected companion object {
@@ -27,7 +27,7 @@ abstract class PageRender(
     private var bitmap: Bitmap? = null
     private var backgroundBitmap: Bitmap? = null
 
-    private lateinit var drawCommand = DRAW_FULL_PAGE
+    private var drawCommand = DRAW_FULL_PAGE
 
     init {
         canvas = Canvas()
@@ -62,14 +62,12 @@ abstract class PageRender(
     private fun getImageFromZip(pageNo: Int): Bitmap {
         val mushaf = getCurrentMushaf()
         val page = "page${String.format("%03d", pageNo)}.png"
-        val zip = ZipFile(mushaf.location)
+        val zip = ZipFile(mushaf?.location)
         val entry = zip.getEntry(page)
         val stream = zip.getInputStream(entry)
 
         return BitmapFactory.decodeStream(stream)
     }
-
-    fun getPageNo(): Int = pageNo
 
     abstract fun onDrawFrame()
 
