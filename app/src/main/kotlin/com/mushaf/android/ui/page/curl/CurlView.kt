@@ -151,7 +151,7 @@ class CurlView : GLSurfaceView, Renderer {
                 // Double Page Render
             } else {
                 pageRender?.release()
-                pageRender = SinglePageRender(globalContext, pageFlip, handler, pageNo)
+                pageRender = SinglePageRender(globalContext, pageFlip, handler, pageNo ?: 1)
             }
 
             pageRender?.onSurfaceChanged(width, height)
