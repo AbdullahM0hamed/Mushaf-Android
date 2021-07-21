@@ -43,8 +43,7 @@ class PageController : BaseController<QuranPageBinding> {
         super.onViewCreated(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
         binding.root.setBackgroundColor(0xFFFEFFFA.toInt())
-
-        //binding.page.setImageBitmap(getImageFromZip(mushaf.location, "page$page.png"))
+        binding.page.pageNo = mushaf.getPageForSurahList().get(surah - 1)
     }
 
     override fun onDestroyView(view: View) {
