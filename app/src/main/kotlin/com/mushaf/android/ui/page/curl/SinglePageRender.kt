@@ -85,9 +85,9 @@ class SinglePageRender(
 
     fun drawPage(number: Int) {
         var background: Bitmap? = getImageFromZip(number)
-        val rect = Rect(0, 0, canvas?.width, canvas?.height)
+        val rect = Rect(0, 0, canvas!!.width, canvas!!.height)
         canvas?.drawBitmap(background!!, null, rect, Paint())
-        background.recycle()
+        background?.recycle()
         background = null
     }
 
