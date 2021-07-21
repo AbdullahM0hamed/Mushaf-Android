@@ -164,12 +164,12 @@ class CurlView : GLSurfaceView, Renderer {
     private fun newHandler() {
         handler = object : Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message?) {
-                when (msg.what) {
+                when (msg?.what ?: 0) {
                     1 -> {
                         try {
                             drawLock.lock()
                             val render = pageRender
-                            if (render != null && render.onEndedDrawing(msg.arg1)) {
+                            if (render != null && render.onEndedDrawing(msg?.arg1)) {
                                 requestRender()
                             }
                         } finally {
