@@ -50,10 +50,9 @@ class CurlView : GLSurfaceView, Renderer {
         pageFlip.setSemiPerimeterRatio(0.8f)
             .setShadowWidthOfFoldEdges(5f, 60f, 0.3f)
             .setShadowWidthOfFoldBase(5f, 80f, 0.4f)
-            .setPixelsOfMesh(pixelsOfMesh)
+            .setPixelsOfMesh(getPixelsOfMesh())
             .enableAutoPage(isAuto)
 
-        val pixelsOfMesh = getPixelsOfMesh()
         setEGLContextClientVersion(2)
 
         drawLock = ReentrantLock()
