@@ -14,7 +14,7 @@ abstract class PageRender(
     val context: Context,
     val pageFlip: PageFlip,
     val handler: Handler,
-    val pageNo: Int
+    var pageNo: Int
 ) : OnPageFlipListener {
 
     protected companion object {
@@ -23,11 +23,11 @@ abstract class PageRender(
         const val DRAW_FULL_PAGE = 2
     }
 
-    private var canvas: Canvas? = null
-    private var bitmap: Bitmap? = null
-    private var backgroundBitmap: Bitmap? = null
+    var canvas: Canvas? = null
+    var bitmap: Bitmap? = null
+    var backgroundBitmap: Bitmap? = null
 
-    private var drawCommand = DRAW_FULL_PAGE
+    var drawCommand = DRAW_FULL_PAGE
 
     init {
         canvas = Canvas()
@@ -59,7 +59,7 @@ abstract class PageRender(
         return false
     }
 
-    private fun getImageFromZip(pageNo: Int): Bitmap {
+    fun getImageFromZip(pageNo: Int): Bitmap {
         val mushaf = getCurrentMushaf()
         val page = "page${String.format("%03d", pageNo)}.png"
         val zip = ZipFile(mushaf?.location)

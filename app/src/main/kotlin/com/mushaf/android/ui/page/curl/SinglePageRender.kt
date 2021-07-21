@@ -18,7 +18,7 @@ class SinglePageRender(
     pageNo: Int
 ) : PageRender(context, pageFlip, handler, pageNo) {
 
-    fun onDrawFrame() {
+    override fun onDrawFrame() {
         pageFlip.deleteUnusedTextures()
         val page = pageFlip.getFirstPage()
 
@@ -44,12 +44,12 @@ class SinglePageRender(
         }
 
         val message = Message.obtain()
-        msg.what = 1
-        msg.arg1 = drawCommand
-        handler.sendMessage(msg)
+        message.what = 1
+        message.arg1 = drawCommand
+        handler.sendMessage(message)
     }
 
-    fun onSurfaceChanged(width: Int, height: Int) {
+    override fun onSurfaceChanged(width: Int, height: Int) {
         if (backgroundBitmap != null) {
             backgroundBitmap?.recycle()
         }
@@ -59,11 +59,11 @@ class SinglePageRender(
         }
 
         val page = pageFlip.getFirstPage()
-        bitmap = Bitmap.create(page.width().toInt(), page.height().toInt(), Bitmap.Config.ARGB_8888)
-        canvas.setBitmap(bitmap)
+        bitmap = Bitmap.createBitmap(page.width().toInt(), page.height().toInt(), Bitmap.Config.ARGB_8888)
+        canvas?.setBitmap(bitmap)
     }
 
-    fun onEndedDrawing(what: Int): Boolean {
+    override fun onEndedDrawing(what: Int): Boolean {
         if (what == DRAW_ANIMATING_FRAME) {
             if (pageFlip.animating()) {
                 drawCommand = DRAW_ANIMATING_FRAME
@@ -85,20 +85,20 @@ class SinglePageRender(
 
     fun drawPage(number: Int) {
         var background: Bitmap? = getImageFromZip(number)
-        val rect = Rect(0, 0, canvas.width, canvas.height)
-        canvas.drawBitmap(background, null, rect, Paint())
+        val rect = Rect(0, 0, canvas?.width, canvas?.height)
+        canvas?.drawBitmap(background!!, null, rect, Paint())
         background.recycle()
         background = null
     }
 
-    fun canFlipForward(): Boolean {
+    override fun canFlipForward(): Boolean {
         val mushaf = getCurrentMushaf()
-        val pageCount = mushaf.getPageCount()
+        val pageCount = mushaf!!.getPageCount()
 
         return (pageNo > pageCount)
     }
 
-    fun canFlipBackward(): Boolean {
+    override fun canFlipBackward(): Boolean {
         if (pageNo > 1) {
             pageFlip.getFirstPage().setSecondTextureWithFirst()
             return true
