@@ -56,7 +56,7 @@ class CurlView : GLSurfaceView, Renderer {
         setEGLContextClientVersion(2)
 
         drawLock = ReentrantLock()
-        pageRender = SinglePageRender(context, pageFlip, handler, pageNo)
+        pageRender = SinglePageRender(context, pageFlip, mHandler, pageNo)
 
         setRenderer(this)
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
@@ -148,7 +148,7 @@ class CurlView : GLSurfaceView, Renderer {
                 // Double Page Render
             } else {
                 pageRender?.release()
-                pageRender = SinglePageRender(globalContext, pageFlip, handler, pageNo ?: 1)
+                pageRender = SinglePageRender(globalContext, pageFlip, mHandler, pageNo ?: 1)
             }
 
             pageRender?.onSurfaceChanged(width, height)
