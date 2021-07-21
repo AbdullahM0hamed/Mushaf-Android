@@ -44,7 +44,6 @@ class CurlView : GLSurfaceView, Renderer {
 
         globalContext = context
         duration = getAnimationDuration()
-        val pixelsOfMesh = getPixelsOfMesh()
         val isAuto = getPageMode()
 
         pageFlip = PageFlip(context)
@@ -54,6 +53,7 @@ class CurlView : GLSurfaceView, Renderer {
             .setPixelsOfMesh(pixelsOfMesh)
             .enableAutoPage(isAuto)
 
+        val pixelsOfMesh = getPixelsOfMesh()
         setEGLContextClientVersion(2)
 
         drawLock = ReentrantLock()
@@ -87,8 +87,6 @@ class CurlView : GLSurfaceView, Renderer {
     fun setAnimateDuration(newDuration: Int) {
         duration = newDuration
     }
-
-    fun getPixelsOfMesh(): Int = pageFlip.getPixelsOfMesh()
 
     fun onFingerDown(x: Float, y: Float) {
         if (!pageFlip.isAnimating() && pageFlip.getFirstPage() != null) {
