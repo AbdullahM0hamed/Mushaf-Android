@@ -28,17 +28,13 @@ class SinglePageRender(
                     drawPage(pageNo + 1)
                     page.setSecondTexture(bitmap)
                 }
-            }
-           
-            else if (!page.isFirstTextureSet()) {
+            } else if (!page.isFirstTextureSet()) {
                 drawPage(pageNo - 1)
                 page.setFirstTexture(bitmap)
             }
 
             pageFlip.drawFlipFrame()
-        }
-
-        else if (drawCommand == DRAW_FULL_PAGE) {
+        } else if (drawCommand == DRAW_FULL_PAGE) {
             if (!page.isFirstTextureSet()) {
                 drawPage(pageNo)
                 page.setFirstTexture(bitmap)
@@ -107,7 +103,7 @@ class SinglePageRender(
             pageFlip.getFirstPage().setSecondTextureWithFirst()
             return true
         }
-        
+
         return false
     }
 }

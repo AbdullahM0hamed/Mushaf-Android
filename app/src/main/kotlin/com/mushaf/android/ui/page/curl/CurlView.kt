@@ -20,20 +20,18 @@ import javax.microedition.khronos.opengles.GL10
 class CurlView : GLSurfaceView, Renderer {
 
     private val TAG = "CurlView"
-    private lateinit var duration: Int
+    private var duration: Int = 1000
     private lateinit var pageFlip: PageFlip
     private lateinit var handler: Handler
     private lateinit var drawLock: ReentrantLock
-    
+
     private var pageRender: PageRender? = null
 
-    constructor(context: Context) {
-        super(context)
+    constructor(context: Context) : super(context) {
         initialise(context)
     }
 
-    constructor(context: Context, attrs: AttributeSet) {
-        super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initialise(context)
     }
 
@@ -46,10 +44,10 @@ class CurlView : GLSurfaceView, Renderer {
 
         pageFlip = PageFlip(context)
         pageFlip.setSemiPerimeterRatio(0.8f)
-                .setShadowWidthOfFoldEdges(5, 60, 0.3f)
-                .setShadowWidthOfFoldBase(5, 80, 0.4f)
-                .setPixelsOfMesh(pixelsOfMesh)
-                .enableAutoPage(isAuto)
+            .setShadowWidthOfFoldEdges(5, 60, 0.3f)
+            .setShadowWidthOfFoldBase(5, 80, 0.4f)
+            .setPixelsOfMesh(pixelsOfMesh)
+            .enableAutoPage(isAuto)
 
         setEGLContextClientVersion(2)
 
@@ -64,10 +62,9 @@ class CurlView : GLSurfaceView, Renderer {
             try {
                 drawLock.lock()
                 if (pageFlip.getSecondPage() != null /* && pageRender instanceOf SinglePageRender */) {
-                    //Double Page Render
-                }
-                else if (pageFlip.getSecondPage() == null /*&& pageRender instanceOf DoublePagesRender */) {
-                    //Single Page Render
+                    // Double Page Render
+                } else if (pageFlip.getSecondPage() == null /*&& pageRender instanceOf DoublePagesRender */) {
+                    // Single Page Render
                 }
 
                 requestRender()
@@ -140,12 +137,12 @@ class CurlView : GLSurfaceView, Renderer {
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
         try {
             pageFlip.onSurfaceChanged(width, height)
-            
+
             val pageNo = pageRender.getPageNo()
             if (pageFlip.getSecondPage() != null && width > height) {
-                //Double Page Render
+                // Double Page Render
             } else {
-                //Single Page Render
+                // Single Page Render
             }
 
             pageRender.onSurfaceChanged(width, height)
@@ -175,6 +172,7 @@ class CurlView : GLSurfaceView, Renderer {
                         } finally {
                             drawLock.unlock()
                         }
+                    }
                 }
             }
         }

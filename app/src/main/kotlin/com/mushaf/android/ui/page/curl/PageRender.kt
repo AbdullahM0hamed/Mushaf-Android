@@ -11,9 +11,9 @@ import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
 import java.util.zip.ZipFile
 
 abstract class PageRender(
-    context: Context, 
-    pageFlip: PageFlip, 
-    handler: Handler, 
+    context: Context,
+    pageFlip: PageFlip,
+    handler: Handler,
     pageNo: Int
 ) : OnPageFlipListener {
 
@@ -26,10 +26,10 @@ abstract class PageRender(
     private var canvas: Canvas? = null
     private var bitmap: Bitmap? = null
     private var backgroundBitmap: Bitmap? = null
-    
+
     private lateinit var drawCommand = DRAW_FULL_PAGE
 
-    init { 
+    init {
         canvas = Canvas()
         pageFlip.setListener(this)
     }

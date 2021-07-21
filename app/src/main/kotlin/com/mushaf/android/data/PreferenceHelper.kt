@@ -47,7 +47,7 @@ object PreferenceHelper {
 
     fun getPixelsOfMesh(): Int = PreferenceManager.getDefaultSharedPreferences(context).getInt(MESH_PIXELS, 10)
 
-    fun getPageMode(): Int = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PAGE_MODE, true)
+    fun getPageMode(): Boolean = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PAGE_MODE, true)
 
     fun Mushaf.getPageCount(): Int = PreferenceManager.getDefaultSharedPreferences(context).getInt("${riwaayah}_${type}_$PAGE_COUNT", 604)
 }
