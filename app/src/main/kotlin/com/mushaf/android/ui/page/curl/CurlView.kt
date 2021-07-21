@@ -162,8 +162,8 @@ class CurlView : GLSurfaceView, Renderer {
     }
 
     private fun newHandler() {
-        handler = Handler(Looper.getMainLooper()) {
-            fun handleMessage(msg: Message): Boolean {
+        handler = object : Handler(Looper.getMainLooper()) {
+            override fun handleMessage(msg: Message?) {
                 when (msg.what) {
                     1 -> {
                         try {
@@ -177,8 +177,6 @@ class CurlView : GLSurfaceView, Renderer {
                         }
                     }
                 }
-
-                return true
             }
         }
     }
