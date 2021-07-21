@@ -44,8 +44,8 @@ class CurlView : GLSurfaceView, Renderer {
 
         pageFlip = PageFlip(context)
         pageFlip.setSemiPerimeterRatio(0.8f)
-            .setShadowWidthOfFoldEdges(5, 60, 0.3f)
-            .setShadowWidthOfFoldBase(5, 80, 0.4f)
+            .setShadowWidthOfFoldEdges(5f, 60f, 0.3f)
+            .setShadowWidthOfFoldBase(5f, 80f, 0.4f)
             .setPixelsOfMesh(pixelsOfMesh)
             .enableAutoPage(isAuto)
 
@@ -100,7 +100,8 @@ class CurlView : GLSurfaceView, Renderer {
         } else if (pageFlip.onFingerMove(x, y)) {
             try {
                 drawLock.lock()
-                if (pageRender != null && pageRender.onFingerMove(x, y)) {
+                val render = pageRender
+                if (render != null && render.onFingerMove(x, y)) {
                     requestRender()
                 }
             } finally {
@@ -114,7 +115,8 @@ class CurlView : GLSurfaceView, Renderer {
             pageFlip.onFingerUp(x, y, duration)
             try {
                 drawLock.lock()
-                if (pageRender != null && pageRender.onFingerUp(x, y)) {
+                val render = pageRender
+                if (render != null && render.onFingerUp(x, y)) {
                     requestRender()
                 }
             } finally {
@@ -127,7 +129,7 @@ class CurlView : GLSurfaceView, Renderer {
         try {
             drawLock.lock()
             if (pageRender != null) {
-                pageRender.onDrawFrame()
+                pageRender!!.onDrawFrame()
             }
         } finally {
             drawLock.unlock()
@@ -145,7 +147,7 @@ class CurlView : GLSurfaceView, Renderer {
                 // Single Page Render
             }
 
-            pageRender.onSurfaceChanged(width, height)
+            pageRender?.onSurfaceChanged(width, height)
         } catch (e: PageFlipException) {
             Log.e(TAG, "Failed to run PageFlipFlipRender:onSurfaceChanged")
         }
@@ -166,7 +168,8 @@ class CurlView : GLSurfaceView, Renderer {
                     1 -> {
                         try {
                             drawLock.lock()
-                            if (pageRender != null && pageRender.onEndedDrawing(msg.arg1)) {
+                            val render = pageRender
+                            if (render != null && render.onEndedDrawing(msg.arg1)) {
                                 requestRender()
                             }
                         } finally {

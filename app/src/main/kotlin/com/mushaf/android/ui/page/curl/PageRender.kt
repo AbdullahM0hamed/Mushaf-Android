@@ -69,6 +69,8 @@ abstract class PageRender(
         return BitmapFactory.decodeStream(stream)
     }
 
+    fun getPageNo(): Int = pageNo
+
     abstract fun onDrawFrame()
 
     abstract fun onSurfaceChanged(width: Int, height: Int)
