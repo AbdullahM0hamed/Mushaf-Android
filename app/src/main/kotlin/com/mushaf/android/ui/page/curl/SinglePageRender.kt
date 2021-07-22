@@ -61,6 +61,7 @@ class SinglePageRender(
         val page = pageFlip.getFirstPage()
         bitmap = Bitmap.createBitmap(page.width().toInt(), page.height().toInt(), Bitmap.Config.ARGB_8888)
         canvas?.setBitmap(bitmap)
+        canvas?.drawColor(0xFFFEFFFA.toInt())
     }
 
     override fun onEndedDrawing(what: Int): Boolean {
