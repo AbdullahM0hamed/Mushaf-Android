@@ -42,7 +42,6 @@ class PageController : BaseController<QuranPageBinding> {
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
-        binding.root.setBackgroundColor(0xFFFEFFFA.toInt())
         binding.page.pageNo = mushaf.getPageForSurahList().get(surah - 1)
         binding.page.requestRender()
     }
