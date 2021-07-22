@@ -42,8 +42,7 @@ class PageController : BaseController<QuranPageBinding> {
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
-        binding.page.pageNo = mushaf.getPageForSurahList().get(surah - 1)
-        binding.page.requestRender()
+        binding.page.setPage(mushaf.getPageForSurahList().get(surah - 1))
     }
 
     override fun onDestroyView(view: View) {

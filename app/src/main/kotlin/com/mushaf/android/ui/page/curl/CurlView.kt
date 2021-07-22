@@ -62,6 +62,12 @@ class CurlView : GLSurfaceView, Renderer {
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
     }
 
+    fun setPage(number: Int) {
+        pageNo = number
+        pageRender = SinglePageRender(globalContext, pageFlip, mHandler, number)
+        requestRender()
+    }
+
     fun enableAutoPage(enable: Boolean) {
         if (pageFlip.enableAutoPage(enable)) {
             try {
