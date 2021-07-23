@@ -92,14 +92,14 @@ class SinglePageRender(
         background = null
     }
 
-    override fun canFlipBackward(): Boolean {
+    override fun canFlipForward(): Boolean {
         val mushaf = getCurrentMushaf()
         val pageCount = mushaf!!.getPageCount()
 
         return (pageNo > pageCount)
     }
 
-    override fun canFlipForward(): Boolean {
+    override fun canFlipBackward(): Boolean {
         if (pageNo > 1) {
             pageFlip.getFirstPage().setSecondTextureWithFirst()
             return true
