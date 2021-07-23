@@ -4,6 +4,8 @@ import android.content.pm.PackageManager
 import android.Manifest.permission
 import android.os.Build
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,12 +16,16 @@ import com.mushaf.android.Mushaf
 import com.mushaf.android.R
 import com.mushaf.android.databinding.MainBinding
 import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
+import com.mushaf.android.ui.page.curl.CurlView
 import com.mushaf.android.ui.surah.SurahListController
 
 class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     lateinit var router: Router
+    lateinit var gestureDetector: GestureDetector
+
+    public var curlView: CurlView? = null
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
@@ -31,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        gestureDetector = GestureDetector(this, this)
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -65,6 +72,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_UP && curlView != null) {
+            curlView.onFingerUp(event.X, event.Y)
+            return true
+        }
+
+        return gestureDetector.onTouchEvent(event)
+    }
+
+    override fun onDown(event: MotionEvent): Boolean {
+        if (curlView != null) {
+            curlView.onFingerDown(event.X, event.Y)
+            return true
+        }
+
+        return super.onDown(event)
+    }
+
+    override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+        if (curlView != null) {
+            curlView.onFingerMove(event2.X, event2.Y)
+            return true
+        }
+
+        return super.onScroll(event, event2, distanceX, distanceY)
+    }
 
     fun downloadMushaf(): Mushaf = throw Exception("Placeholder")
 }
