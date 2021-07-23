@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
         return true
     }
 
-    override onShowPress(event: MotionEvent) {
+    override fun onShowPress(event: MotionEvent) {
     }
 
     fun downloadMushaf(): Mushaf = throw Exception("Placeholder")
