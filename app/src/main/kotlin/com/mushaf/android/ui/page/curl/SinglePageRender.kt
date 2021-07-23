@@ -85,6 +85,8 @@ class SinglePageRender(
     }
 
     fun drawPage(number: Int) {
+        bitmap = Bitmap.createBitmap(page.width().toInt(), page.height().toInt(), Bitmap.Config.ARGB_8888)
+        canvas?.setBitmap(bitmap)
         var background: Bitmap? = getImageFromZip(number)
         val rect = Rect(0, 30, canvas!!.width, canvas!!.height - 30)
         canvas?.drawBitmap(background!!, null, rect, Paint())
@@ -96,11 +98,14 @@ class SinglePageRender(
         val mushaf = getCurrentMushaf()
         val pageCount = mushaf!!.getPageCount()
 
-        return (pageNo > pageCount)
+        return (pageNo < pageCount)
     }
 
     override fun canFlipBackward(): Boolean {
-        if (pageNo > 1) {
+        val mushaf = getCurrentMushaf()
+        val pageCount = mushaf!!.getPageCount()
+
+        if (pageNo > 1 && pageNo <= pageCount) {
             pageFlip.getFirstPage().setSecondTextureWithFirst()
             return true
         }

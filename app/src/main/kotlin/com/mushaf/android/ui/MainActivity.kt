@@ -84,19 +84,12 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
     }
 
     override fun onDown(event: MotionEvent): Boolean {
-        val curl = curlView
-        if (curl != null) {
-            curl.onFingerDown(event.getX(), event.getY())
-        }
-
+        curl?.onFingerDown(event.getX(), event.getY())
         return true
     }
 
     override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        val curl = curlView
-        if (curl != null) {
-            curl.onFingerMove(event2.getX(), event2.getY())
-        }
+        curl?.onFingerMove(event2.getX(), event2.getY())
         
         return true
     }
