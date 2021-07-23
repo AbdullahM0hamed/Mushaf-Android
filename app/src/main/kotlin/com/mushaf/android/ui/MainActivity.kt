@@ -84,12 +84,12 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
     }
 
     override fun onDown(event: MotionEvent): Boolean {
-        curl?.onFingerDown(event.getX(), event.getY())
+        curlView?.onFingerDown(event.getX(), event.getY())
         return true
     }
 
     override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        curl?.onFingerMove(event2.getX(), event2.getY())
+        curlView?.onFingerMove(event2.getX(), event2.getY())
         
         return true
     }
