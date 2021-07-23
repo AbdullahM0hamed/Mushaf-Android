@@ -72,7 +72,7 @@ class SinglePageRender(
             } else {
                 val state = pageFlip.getFlipState()
                 if (state == PageFlipState.END_WITH_BACKWARD) {
-                    pageFlip.getFirstPage().setFirstTextureWithSecond()
+                    pageFlip.getFirstPage().setSecondTextureWithFirst()
                     pageNo++
                 }
 
