@@ -86,21 +86,22 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
     override fun onDown(event: MotionEvent): Boolean {
         val curl = curlView
         if (curl != null) {
-            curl.onFingerDown(event.getX(), event.Y())
-            return true
+            curl.onFingerDown(event.getX(), event.getY())
         }
 
-        return super.onDown(event)
+        return true
     }
 
     override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
         val curl = curlView
         if (curl != null) {
             curl.onFingerMove(event2.getX(), event2.getY())
-            return true
         }
+        
+        return true
+    }
 
-        return super.onScroll(event, event2, distanceX, distanceY)
+    override onShowPress(event: MotionEvent) {
     }
 
     fun downloadMushaf(): Mushaf = throw Exception("Placeholder")
