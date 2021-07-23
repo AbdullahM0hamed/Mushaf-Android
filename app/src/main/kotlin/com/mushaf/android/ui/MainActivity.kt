@@ -103,6 +103,11 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
 
     override fun onSingleTapUp(event: MotionEvent): Boolean = false
 
+    override fun onFling(event: MotionEvent, event2: MotionEvent, velocityX: Float, velocityY: Float) = false
+
+    override fun onLongPress(event: MotionEvent) {
+    }
+
     override fun onShowPress(event: MotionEvent) {
     }
 
