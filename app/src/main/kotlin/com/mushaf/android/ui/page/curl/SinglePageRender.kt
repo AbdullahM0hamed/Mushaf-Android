@@ -25,11 +25,11 @@ class SinglePageRender(
         if (drawCommand == DRAW_MOVING_FRAME || drawCommand == DRAW_ANIMATING_FRAME) {
             if (pageFlip.getFlipState() == PageFlipState.FORWARD_FLIP) {
                 if (!page.isSecondTextureSet()) {
-                    drawPage(pageNo + 1)
+                    drawPage(pageNo - 1)
                     page.setSecondTexture(bitmap)
                 }
             } else if (!page.isFirstTextureSet()) {
-                drawPage(pageNo - 1)
+                drawPage(pageNo + 1)
                 page.setFirstTexture(bitmap)
             }
 
@@ -93,14 +93,14 @@ class SinglePageRender(
         background = null
     }
 
-    override fun canFlipForward(): Boolean {
+    override fun canFlipBackward(): Boolean {
         val mushaf = getCurrentMushaf()
         val pageCount = mushaf!!.getPageCount()
 
         return (pageNo < pageCount)
     }
 
-    override fun canFlipBackward(): Boolean {
+    override fun canFlipForward(): Boolean {
         val mushaf = getCurrentMushaf()
         val pageCount = mushaf!!.getPageCount()
 
