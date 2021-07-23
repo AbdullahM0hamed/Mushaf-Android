@@ -43,12 +43,7 @@ class PageController : BaseController<QuranPageBinding> {
         super.onViewCreated(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
         (activity as MainActivity).curlView = binding.page
-        binding.page.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_FULLSCREEN |
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                View.SYSTEM_UI_FLAG_IMMERSIVE |
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+        binding.page.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN)
         binding.page.setPage(mushaf.getPageForSurahList().get(surah - 1))
     }
 

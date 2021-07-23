@@ -5,6 +5,7 @@ import android.Manifest.permission
 import android.os.Build
 import android.os.Bundle
 import android.view.GestureDetector
+import android.view.GestureDetector.OnGestureListener
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,7 +20,7 @@ import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
 import com.mushaf.android.ui.page.curl.CurlView
 import com.mushaf.android.ui.surah.SurahListController
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnGestureListener {
 
     public lateinit var binding: MainBinding
     lateinit var router: Router
@@ -73,8 +74,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_UP && curlView != null) {
-            curlView.onFingerUp(event.X, event.Y)
+        val curl = curlView
+        if (event.action == MotionEvent.ACTION_UP && curl != null) {
+            curl.onFingerUp(event.getX(), event.getY())
             return true
         }
 
@@ -82,8 +84,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDown(event: MotionEvent): Boolean {
-        if (curlView != null) {
-            curlView.onFingerDown(event.X, event.Y)
+        val curl = curlView
+        if (curl != null) {
+            curl.onFingerDown(event.getX(), event.Y())
             return true
         }
 
@@ -91,8 +94,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        if (curlView != null) {
-            curlView.onFingerMove(event2.X, event2.Y)
+        val curl = curlView
+        if (curl != null) {
+            curl.onFingerMove(event2.getX(), event2.getY())
             return true
         }
 
