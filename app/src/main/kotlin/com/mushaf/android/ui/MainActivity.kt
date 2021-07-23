@@ -101,6 +101,8 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
         return true
     }
 
+    override fun onSingleTapUp(event: MotionEvent): Boolean = false
+
     override fun onShowPress(event: MotionEvent) {
     }
 
