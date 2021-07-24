@@ -100,7 +100,7 @@ class SinglePageRender(
         val pageCount = mushaf!!.getPageCount()
 
         if (pageNo < pageCount) {
-            pageFlip.getFirstPage().setSecondTextureWithFirst()
+            pageFlip.getFirstPage().setFirstTextureWithSecond()
             return true
         }
 
