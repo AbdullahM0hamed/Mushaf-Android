@@ -25,7 +25,7 @@ class SinglePageRender(
         if (drawCommand == DRAW_MOVING_FRAME || drawCommand == DRAW_ANIMATING_FRAME) {
             if (pageFlip.getFlipState() == PageFlipState.FORWARD_FLIP) {
                 if (!page.isSecondTextureSet()) {
-                    drawPage(pageNo - 1)
+                    drawPage(pageNo)
                     page.setSecondTexture(bitmap)
                 }
             } else if (!page.isFirstTextureSet()) {
