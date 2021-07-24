@@ -29,7 +29,7 @@ class SinglePageRender(
                     page.setSecondTexture(bitmap)
                 }
             } else if (!page.isFirstTextureSet()) {
-                drawPage(++pageNo)
+                drawPage(pageNo)
                 page.setFirstTexture(bitmap)
             }
 
