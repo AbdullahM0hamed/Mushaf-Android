@@ -76,6 +76,10 @@ class SinglePageRender(
                     pageNo++
                 }
 
+                if (state == PageFlipState.END_WITH_FORWARD) {
+                    pageFlip.getFirstPage().setFirstTextureWithSecond()
+                }
+
                 drawCommand = DRAW_FULL_PAGE
                 return true
             }
