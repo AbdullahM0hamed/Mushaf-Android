@@ -77,7 +77,6 @@ class SinglePageRender(
                 }
 
                 if (state == PageFlipState.END_WITH_FORWARD) {
-                    pageFlip.getFirstPage().setFirstTextureWithSecond()
                     pageNo--
                 }
 
