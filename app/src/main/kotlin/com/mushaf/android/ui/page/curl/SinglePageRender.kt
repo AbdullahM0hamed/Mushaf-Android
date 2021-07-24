@@ -36,7 +36,7 @@ class SinglePageRender(
             pageFlip.drawFlipFrame()
         } else if (drawCommand == DRAW_FULL_PAGE) {
             if (!page.isFirstTextureSet()) {
-                drawPage(pageNo)
+                drawPage(pageNo - 1)
                 page.setFirstTexture(bitmap)
             }
 
