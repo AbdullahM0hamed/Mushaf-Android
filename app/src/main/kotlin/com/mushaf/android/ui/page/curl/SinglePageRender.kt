@@ -78,7 +78,7 @@ class SinglePageRender(
 
                 if (state == PageFlipState.END_WITH_FORWARD) {
                     pageNo--
-                    pageFlip.getFirstPage().setSecondTexture(getImageFromZip(pageNo))
+                    pageFlip.getFirstPage().setFirstTextureWithSecond()
                 }
 
                 drawCommand = DRAW_FULL_PAGE
