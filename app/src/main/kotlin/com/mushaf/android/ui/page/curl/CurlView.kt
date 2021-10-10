@@ -77,12 +77,12 @@ class CurlView : GLSurfaceView, Renderer, OnGestureListener {
     }
 
     override fun onDown(event: MotionEvent): Boolean {
-        curlView?.onFingerDown(event.getX(), event.getY())
+        onFingerDown(event.getX(), event.getY())
         return true
     }
 
     override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        curlView?.onFingerMove(event2.getX(), event2.getY())
+        onFingerMove(event2.getX(), event2.getY())
         return true
     }
 
