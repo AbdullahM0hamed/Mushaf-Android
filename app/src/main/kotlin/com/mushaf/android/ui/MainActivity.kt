@@ -77,10 +77,9 @@ class MainActivity : AppCompatActivity() {
 
     fun downloadMushaf() {
         thread {
-            val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
             val client = OkHttpClient.Builder().build()
             val request = Request.Builder
-                .url(url)
+                .url("https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json")
                 .build()
 
             val array = JSONArray(client.newCall(request).execute())
