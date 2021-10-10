@@ -43,6 +43,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
     implementation 'com.github.eschao:android-PageFlip:1.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0-RC1'
 
     final coroutines_version = '1.4.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"

@@ -6,6 +6,9 @@ import android.opengl.GLSurfaceView.Renderer
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.view.GestureDetector
+import android.view.GestureDetector.OnGestureListener
+import android.view.MotionEvent
 import android.util.AttributeSet
 import android.util.Log
 import com.eschao.android.widget.pageflip.PageFlip
@@ -17,11 +20,12 @@ import java.util.concurrent.locks.ReentrantLock
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class CurlView : GLSurfaceView, Renderer {
+class CurlView : GLSurfaceView, Renderer, OnGestureListener {
 
     private val TAG = "CurlView"
     private var duration: Int = 1000
     private lateinit var pageFlip: PageFlip
+    private lateinit var gestureDetector: GestureDetector
 
     //Pain, naming it handler conflicts with some getHandler() method I can't find
     private lateinit var mHandler: Handler
@@ -45,6 +49,7 @@ class CurlView : GLSurfaceView, Renderer {
         globalContext = context
         duration = getAnimationDuration()
         val isAuto = getPageMode()
+        gestureDetector = GestureDetector(context, this)
 
         pageFlip = PageFlip(context)
         pageFlip.setSemiPerimeterRatio(0.8f)
@@ -60,6 +65,35 @@ class CurlView : GLSurfaceView, Renderer {
 
         setRenderer(this)
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_UP) {
+            onFingerUp(event.getX(), event.getY())
+            return true
+        }
+
+        return gestureDetector.onTouchEvent(event)
+    }
+
+    override fun onDown(event: MotionEvent): Boolean {
+        curlView?.onFingerDown(event.getX(), event.getY())
+        return true
+    }
+
+    override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+        curlView?.onFingerMove(event2.getX(), event2.getY())
+        return true
+    }
+
+    override fun onSingleTapUp(event: MotionEvent): Boolean = false
+
+    override fun onFling(event: MotionEvent, event2: MotionEvent, velocityX: Float, velocityY: Float) = false
+
+    override fun onLongPress(event: MotionEvent) {
+    }
+
+    override fun onShowPress(event: MotionEvent) {
     }
 
     fun setPage(number: Int) {

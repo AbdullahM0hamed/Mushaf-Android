@@ -4,9 +4,6 @@ import android.content.pm.PackageManager
 import android.Manifest.permission
 import android.os.Build
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.GestureDetector.OnGestureListener
-import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,14 +16,16 @@ import com.mushaf.android.databinding.MainBinding
 import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
 import com.mushaf.android.ui.page.curl.CurlView
 import com.mushaf.android.ui.surah.SurahListController
+import kotlin.concurrent.thread
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
+import org.json.JSONArray
 
-class MainActivity : AppCompatActivity(), OnGestureListener {
+class MainActivity : AppCompatActivity() {
 
     public lateinit var binding: MainBinding
     lateinit var router: Router
-    lateinit var gestureDetector: GestureDetector
-
-    public var curlView: CurlView? = null
 
     override fun onCreate(savedInstance: Bundle?) {
         super.onCreate(savedInstance)
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
 
         binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        gestureDetector = GestureDetector(this, this)
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (ContextCompat.checkSelfPermission(this, permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -55,7 +53,12 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
 
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
-                    R.id.nav_read -> router.setRoot(RouterTransaction.with(SurahListController(getCurrentMushaf()!!)))
+                    R.id.nav_read -> {
+                        val mushaf = getCurrentMushaf()
+                        if (mushaf != null) {
+                            router.setRoot(RouterTransaction.with(SurahListController(mushaf)))
+                        }
+                    }
                 }
             }
             true
@@ -73,36 +76,17 @@ class MainActivity : AppCompatActivity(), OnGestureListener {
         }
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        val curl = curlView
-        if (event.action == MotionEvent.ACTION_UP && curl != null) {
-            curl.onFingerUp(event.getX(), event.getY())
-            return true
+    fun downloadMushaf() {
+        val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
+        thread {
+            val client = OkHttpClient.Builder().build()
+            val request = Request.Builder
+                .url(url
+                .build()
+
+            val array = JSONArray(client.newCall(request).execute())
+            val default = array.getJSONObject(0)
+            android.widget.Toast.makeText(this, default.toString(), 5).show()
         }
-
-        return gestureDetector.onTouchEvent(event)
     }
-
-    override fun onDown(event: MotionEvent): Boolean {
-        curlView?.onFingerDown(event.getX(), event.getY())
-        return true
-    }
-
-    override fun onScroll(event: MotionEvent, event2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-        curlView?.onFingerMove(event2.getX(), event2.getY())
-        
-        return true
-    }
-
-    override fun onSingleTapUp(event: MotionEvent): Boolean = false
-
-    override fun onFling(event: MotionEvent, event2: MotionEvent, velocityX: Float, velocityY: Float) = false
-
-    override fun onLongPress(event: MotionEvent) {
-    }
-
-    override fun onShowPress(event: MotionEvent) {
-    }
-
-    fun downloadMushaf(): Mushaf = throw Exception("Placeholder")
 }
