@@ -42,7 +42,6 @@ class PageController : BaseController<QuranPageBinding> {
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.GONE)
-        (activity as MainActivity).curlView = binding.page
         binding.page.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN)
         binding.page.setPage(mushaf.getPageForSurahList().get(surah - 1))
     }
@@ -50,6 +49,5 @@ class PageController : BaseController<QuranPageBinding> {
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         (activity as MainActivity).binding.bottomNavigation.setVisibility(View.VISIBLE)
-        (activity as MainActivity).curlView = null
     }
 }

@@ -14,7 +14,6 @@ import com.mushaf.android.Mushaf
 import com.mushaf.android.R
 import com.mushaf.android.databinding.MainBinding
 import com.mushaf.android.data.PreferenceHelper.getCurrentMushaf
-import com.mushaf.android.ui.page.curl.CurlView
 import com.mushaf.android.ui.surah.SurahListController
 import kotlin.concurrent.thread
 import okhttp3.OkHttpClient
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         thread {
             val client = OkHttpClient.Builder().build()
             val request = Request.Builder
-                .url(url
+                .url(url)
                 .build()
 
             val array = JSONArray(client.newCall(request).execute())
