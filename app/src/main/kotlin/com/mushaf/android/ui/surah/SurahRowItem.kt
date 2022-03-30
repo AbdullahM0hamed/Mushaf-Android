@@ -12,7 +12,6 @@ import com.mushaf.android.ui.page.PageController
 
 data class SurahRowItem(
     val controller: SurahListController,
-    val mushaf: Mushaf,
     val surah: Int,
     val ayahCount: Int
 ) :
