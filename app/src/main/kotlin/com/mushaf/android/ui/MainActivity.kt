@@ -53,10 +53,7 @@ class MainActivity : AppCompatActivity() {
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
                     R.id.nav_read -> {
-                        val mushaf = getCurrentMushaf()
-                        if (mushaf != null) {
-                            router.setRoot(RouterTransaction.with(SurahListController(mushaf)))
-                        }
+                        router.setRoot(RouterTransaction.with(SurahListController()))
                     }
                 }
             }
@@ -72,20 +69,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (!router.handleBack()) {
             super.onBackPressed()
-        }
-    }
-
-    fun downloadMushaf() {
-        thread {
-            val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
-            val client = OkHttpClient.Builder().build()
-            val request = Request.Builder()
-                .url(url)
-                .build()
-
-            val array = JSONArray(client.newCall(request).execute())
-            val default = array.getJSONObject(0)
-            android.widget.Toast.makeText(this, default.toString(), 5).show()
         }
     }
 }

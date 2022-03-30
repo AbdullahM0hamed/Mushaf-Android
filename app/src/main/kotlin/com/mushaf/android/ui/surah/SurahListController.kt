@@ -22,17 +22,6 @@ class SurahListController : BaseController<SurahListBinding> {
     private lateinit var mushaf: Mushaf
     private lateinit var surahRowItems: List<SurahRowItem>
 
-    @Suppress("unused")
-    constructor(bundle: Bundle) : super(bundle)
-
-    constructor(mushaf: Mushaf) : this(
-        Bundle().apply {
-            putString("current_mushaf", mushaf.riwaayah + "_" + mushaf.type.toString())
-        }
-    ) {
-        this.mushaf = mushaf
-    }
-
     override fun inflateView(
         inflater: LayoutInflater,
         container: ViewGroup
@@ -59,4 +48,18 @@ class SurahListController : BaseController<SurahListBinding> {
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
     }
+
+    //fun downloadMushaf() {
+        //thread {
+            //val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
+            //val client = OkHttpClient.Builder().build()
+            //val request = Request.Builder()
+                //.url(url)
+                //.build()
+
+            //val array = JSONArray(client.newCall(request).execute())
+            //val default = array.getJSONObject(0)
+            //android.widget.Toast.makeText(this, default.toString(), 5).show()
+        //}
+    //}
 }
