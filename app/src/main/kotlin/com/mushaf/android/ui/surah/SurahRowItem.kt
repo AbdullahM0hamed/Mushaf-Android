@@ -28,7 +28,7 @@ data class SurahRowItem(
         binding.surahImg.setImageResource(context.resources.getIdentifier("surah_name_$surah", "drawable", context.packageName))
 
         binding.root.setOnClickListener {
-            controller.router.pushController(RouterTransaction.with(PageController(mushaf, surah)))
+            //controller.router.pushController(RouterTransaction.with(PageController(mushaf, surah)))
         }
     }
 
