@@ -1,7 +1,9 @@
 package com.mushaf.android.ui.surah
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+imp
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,10 +12,13 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
 import com.mushaf.android.Mushaf
+import com.mushaf.android.appStore
 import com.mushaf.android.data.PreferenceHelper.getAyaatCount
 import com.mushaf.android.databinding.SurahListBinding
 import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
+import okhttp3.Request
+import org.reduxkotlin.StoreSubscription
 
 class SurahListController : BaseController<SurahListBinding>() {
 
@@ -21,6 +26,7 @@ class SurahListController : BaseController<SurahListBinding>() {
     private lateinit var adapter: GenericFastAdapter
     private lateinit var mushaf: Mushaf
     private lateinit var surahRowItems: List<SurahRowItem>
+    private lateinit var storesubscription: StoreSubscription
 
     override fun inflateView(
         inflater: LayoutInflater,
@@ -32,6 +38,9 @@ class SurahListController : BaseController<SurahListBinding>() {
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
+        storeSubscription = appStore.subscribe {
+            newState(appStore.riwaayahState)
+        }
 
         adapter = FastAdapter.with(listOf(itemAdapter))
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
@@ -46,19 +55,14 @@ class SurahListController : BaseController<SurahListBinding>() {
 
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
+        storeSubscription()
     }
 
-    //fun downloadMushaf() {
-        //thread {
-            //val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
-            //val client = OkHttpClient.Builder().build()
-            //val request = Request.Builder()
-                //.url(url)
-                //.build()
+    fun newState(state: RiwaayahState) {
+        //TODO: handle state
+    }
 
-            //val array = JSONArray(client.newCall(request).execute())
-            //val default = array.getJSONObject(0)
-            //android.widget.Toast.makeText(this, default.toString(), 5).show()
-        //}
-    //}
+    fun downloadMushaf() {
+        val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
+    }
 }
