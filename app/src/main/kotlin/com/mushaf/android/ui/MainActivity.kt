@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             if (currentRoot?.tag()?.toIntOrNull() != id) {
                 when (id) {
                     R.id.nav_read -> {
-                        router.setRoot(RouterTransaction.with(SurahListController()))
+                        router.setRoot(RouterTransaction.with(SurahListController(this)))
                     }
                 }
             }

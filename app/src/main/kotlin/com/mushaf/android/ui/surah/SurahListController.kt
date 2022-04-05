@@ -3,7 +3,6 @@ package com.mushaf.android.ui.surah
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
-imp
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,25 +13,30 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
 import com.mushaf.android.Mushaf
 import com.mushaf.android.appStore
 import com.mushaf.android.data.PreferenceHelper.getAyaatCount
+import com.mushaf.android.databinding.DialogBinding
 import com.mushaf.android.databinding.SurahListBinding
 import com.mushaf.android.ui.MainActivity
 import com.mushaf.android.ui.base.BaseController
 import okhttp3.Request
 import org.reduxkotlin.StoreSubscription
 
-class SurahListController : BaseController<SurahListBinding>() {
+class SurahListController(
+    val context: Context
+) : BaseController<SurahListBinding>() {
 
     private var itemAdapter: GenericItemAdapter = Companion.items()
     private lateinit var adapter: GenericFastAdapter
     private lateinit var mushaf: Mushaf
     private lateinit var surahRowItems: List<SurahRowItem>
     private lateinit var storesubscription: StoreSubscription
+    private lateinit var dialogView: View
 
     override fun inflateView(
         inflater: LayoutInflater,
         container: ViewGroup
     ): View {
         binding = SurahListBinding.inflate(inflater)
+        dialogView = DialogBinding.inflate(inflater).root
         return binding.root
     }
 
@@ -64,5 +68,8 @@ class SurahListController : BaseController<SurahListBinding>() {
 
     fun downloadMushaf() {
         val url = "https://raw.githubusercontent.com/AbdullahM0hamed/Masaahif/master/masaahif.json"
+        AlertDialog.Builder(context)
+            .setView(dialogView)
+            .show()
     }
 }
