@@ -45,7 +45,7 @@ class SurahListController(
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         storeSubscription = appStore.subscribe {
-            newState(appStore.riwaayahState)
+            newState(appStore.state.riwaayahState)
         }
 
         adapter = FastAdapter.with(listOf(itemAdapter))
