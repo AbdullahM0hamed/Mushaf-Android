@@ -8,10 +8,12 @@ fun appStateReducer(state: AppState, action: Any) = AppState(
     riwaayahState = riwaayahStateReducer(state.riwaayahState, action)
 )
 
-fun riwaayahStateReducer(state: RiwaayahState, action: Any) {
+fun riwaayahStateReducer(state: RiwaayahState, action: Any): RiwaayahState {
     var currentState = state
 
     if (action is DownloadRiwaayah) {
         currentState.copy(action.riwaayah, action.riwaayah_id)
     }
+
+    return currentState
 }

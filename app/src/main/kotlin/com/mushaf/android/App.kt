@@ -4,11 +4,11 @@ import android.app.Application
 import android.content.Context
 
 import com.mushaf.android.AppState
-import com.mushaf.android.appReducer
+import com.mushaf.android.appStateReducer
 
 import org.reduxkotlin.createThreadSafeStore
 
-val appStore = createThreadSafeStore(::appReducer, AppState())
+val appStore = createThreadSafeStore(::appStateReducer, AppState())
 
 class App : Application() {
 

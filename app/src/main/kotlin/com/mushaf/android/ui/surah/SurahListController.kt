@@ -1,6 +1,7 @@
 package com.mushaf.android.ui.surah
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion
 import com.mushaf.android.Mushaf
+import com.mushaf.android.RiwaayahState
 import com.mushaf.android.appStore
 import com.mushaf.android.data.PreferenceHelper.getAyaatCount
 import com.mushaf.android.databinding.DialogBinding
@@ -28,7 +30,7 @@ class SurahListController(
     private lateinit var adapter: GenericFastAdapter
     private lateinit var mushaf: Mushaf
     private lateinit var surahRowItems: List<SurahRowItem>
-    private lateinit var storesubscription: StoreSubscription
+    private lateinit var storeSubscription: StoreSubscription
     private lateinit var dialogView: View
 
     override fun inflateView(
